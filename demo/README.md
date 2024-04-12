@@ -1,0 +1,1 @@
+This section contains some static resources that need to be showcased in the demo.
