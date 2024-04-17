@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MM-TTS: A Unified Framework for Multimodal, Prompt-Induced
+        Emotional Text-to-Speech Synthesis</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+
+</html>
+
+<body>
+
+    <header>
+        <h1>Demo of "MM-TTS: A Unified Framework for Multimodal, Prompt-Induced Emotional Text-to-Speech Synthesis"</h1>
+    </header>
+    <main>
+        <div class="section">
+            <h2>Voiceover Scenario</h2>
+            <!-- display for 3 rows, the first row with no sound video, the second is the man actor audio, the third row is the woman acotr audio -->
+            <table id="VS_table">
+                <thead>
+                    <tr>
+                        <th>Origin video without sound</th>
+                        <th>Origin face image</th>
+                        <th>Origin speech</th>
+                        <th>Origin text</th>
+                        <th>EPAlign infered emotion</th>
+                        <th>EMITTS generated speech (Speaker0)</th>
+                        <th>EMITTS generated speech (Speaker1)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h2>Emotional Text-to-Speech Synthesis</h2>
+            <!-- display for 3 rows, the first row with no sound video, the second is the man actor audio, the third row is the woman acotr audio -->
+            <table id="ETTS_table">
+                <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>Speaker id</th>
+                        <th>Emotion</th>
+                        <th>Origin</th>
+                        <th>VITS (label)</th>
+                        <th>MM-TTS (VITS)</th>
+                        <th>Emotional-TTS</th>
+                        <th>MM-TTS (Tacotron)</th>
+                        <th>EmoSpeech</th>
+                        <th>MM-TTS (FastSpeech)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>For Academic only</p>
+    </footer>
+</body>
+
+</html>
