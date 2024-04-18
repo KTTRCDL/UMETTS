@@ -3,3 +3,5 @@ regex
 tqdm
 torch
 torchvision
+torchaudio
+librosa

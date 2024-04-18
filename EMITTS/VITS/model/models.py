@@ -443,9 +443,9 @@ class SynthesizerTrn(nn.Module):
         else:
             e = None
 
+        z, m_q, logs_q, y_mask = self.posteriorEncoder(y, y_lengths, s=s, e=e)
         # posterir Encoder w/o emotion
-        # z, m_q, logs_q, y_mask = self.posteriorEncoder(y, y_lengths, s=s, e=e)
-        z, m_q, logs_q, y_mask = self.posteriorEncoder(y, y_lengths, s=s, e=None)
+        # z, m_q, logs_q, y_mask = self.posteriorEncoder(y, y_lengths, s=s, e=None)
             
 
         z_p = self.flow(z, y_mask, s=s, e=e)
@@ -484,9 +484,9 @@ class SynthesizerTrn(nn.Module):
         z_slice, ids_slice = commons.rand_slice_segments(
             z, y_lengths, self.segment_size)
 
+        output = self.vocoder(z_slice, s=s, e=e)
         # vocoder w/o emotion
-        # output = self.vocoder(z_slice, s=s, e=e)
-        output = self.vocoder(z_slice, s=s, e=None)
+        # output = self.vocoder(z_slice, s=s, e=None)
         return output, l_length, attn, ids_slice, x_mask, y_mask, (z, z_p, m_p, logs_p, m_q, logs_q)
 
     def infer(self, x, x_lengths, sid=None, efeature=None, noise_scale=1, length_scale=1, noise_scale_w=1., max_len=None):
