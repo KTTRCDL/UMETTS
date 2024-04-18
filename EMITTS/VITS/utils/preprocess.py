@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
   args = parser.parse_args()
 
-  t = 13500
+  t = 0
   for filelist in args.filelists:
     print("START:", filelist)
     new_filelist = filelist + "." + args.out_extension
@@ -62,5 +62,5 @@ if __name__ == '__main__':
         # f.writelines(["|".join(x) + "\n" for x in filepaths_and_text])
         f.write("|".join(filepaths_and_text[i]) + "\n")
         # print("|".join(filepaths_and_text[i]) + "\n")
-        if i == t + 499:
-          break
+        # if i == t + 499:
+        #   break

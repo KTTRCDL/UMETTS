@@ -505,9 +505,9 @@ class SynthesizerTrn(nn.Module):
         logw = self.stochasticDurationPredictor(
             x, x_mask, s=s, e=e, reverse=True, noise_scale=noise_scale)
         w = torch.exp(logw) * x_mask * length_scale
-        w_ceil = torch.ceil(w)  # 向上取整
+        w_ceil = torch.ceil(w)  # rounded up
         y_lengths = torch.clamp_min(
-            torch.sum(w_ceil, [1, 2]), 1).long()  # 令 y_lengths 至少为 1
+            torch.sum(w_ceil, [1, 2]), 1).long()  # make sure y_lengths at least 1
         y_mask = torch.unsqueeze(commons.sequence_mask(
             y_lengths, None), 1).to(x_mask.dtype)
         attn_mask = torch.unsqueeze(x_mask, 2) * torch.unsqueeze(y_mask, -1)
