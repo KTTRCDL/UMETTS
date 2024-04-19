@@ -35,15 +35,46 @@ ETTS_data = [{"text": "No, I burst the balloon!", "sid": "1", "emotion": "Sad", 
     {"text": "Off for the prison ship.", "sid": "10", "emotion": "Neutral", "origin_audio_path": "./static/demo_audio/origin/0020_000244.wav", "vits_label_path": "./static/demo_audio/vits_label/0020_000244.wav", "mmtts_vits_path": "./static/demo_audio/mmtts_vits/0020_000244.wav", "emotional_tts_path": "./static/demo_audio/emotional_tts/0020_000244.wav", "mmtts_tacotron_path": "./static/demo_audio/mmtts_tacotron/0020_000244.wav", "emospeech_path": "./static/demo_audio/emospeech/0020_000244.wav", "mmtts_fastspeech_path": "./static/demo_audio/mmtts_fastspeech/0020_000244.wav"},
     {"text": "Will call her Lily, for short.", "sid": "10", "emotion": "Surprise", "origin_audio_path": "./static/demo_audio/origin/0020_001632.wav", "vits_label_path": "./static/demo_audio/vits_label/0020_001632.wav", "mmtts_vits_path": "./static/demo_audio/mmtts_vits/0020_001632.wav", "emotional_tts_path": "./static/demo_audio/emotional_tts/0020_001632.wav", "mmtts_tacotron_path": "./static/demo_audio/mmtts_tacotron/0020_001632.wav", "emospeech_path": "./static/demo_audio/emospeech/0020_001632.wav", "mmtts_fastspeech_path": "./static/demo_audio/mmtts_fastspeech/0020_001632.wav"}
 ]
+
+ZS_data = [
+    {"text": "If they mother knew it.", "sid": "1", "ref_img1_path": "./static/demo_image/zero_shot/0_1.jpg", "inf_emotion1": "Happily Surprised", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_1_happyandsurprise.wav", "ref_img2_path": "./static/demo_image/zero_shot/0_2.jpg", "inf_emotion2": "Happily Disgusted", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_2_happyanddisgust.wav", "ref_img3_path": "./static/demo_image/zero_shot/0_3.jpg", "inf_emotion3": "Sadly Fearful", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_3_sadandfear.wav"},
+    {"text": "If they mother knew it.", "sid": "1", "ref_img1_path": "./static/demo_image/zero_shot/0_4.jpg", "inf_emotion1": "Sadly Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_4_sadandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/0_5.jpg", "inf_emotion2": "Sadly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_5_sadandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/0_6.jpg", "inf_emotion3": "Sadly Disgusted", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_6_sadanddisgust.wav"},
+    {"text": "If they mother knew it.", "sid": "1", "ref_img1_path": "./static/demo_image/zero_shot/0_7.jpg", "inf_emotion1": "Fearfully Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_7_fearandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/0_8.jpg", "inf_emotion2": "Fearfully Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_8_fearandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/0_9.jpg", "inf_emotion3": "Angrily Surprised", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_9_angryandsurprise.wav"},
+    {"text": "If they mother knew it.", "sid": "1", "ref_img1_path": "./static/demo_image/zero_shot/0_10.jpg", "inf_emotion1": "Angrily Disgusted", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_10_angryanddisgust.wav", "ref_img2_path": "./static/demo_image/zero_shot/0_11.jpg", "inf_emotion2": "Disgustingly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_0_11_disgustandsurprise.wav", "ref_img3_path": "", "inf_emotion3": "", "MMTTS_audio3_path": ""},
+    {"text": "He was still in the forest!", "sid": "5", "ref_img1_path": "./static/demo_image/zero_shot/1_1.jpg", "inf_emotion1": "Happily Surprised", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_1_happyandsurprise.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_2.jpg", "inf_emotion2": "Happily Disgusted", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_2_happyanddisgust.wav", "ref_img3_path": "./static/demo_image/zero_shot/1_3.jpg", "inf_emotion3": "Sadly Fearful", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_3_sadandfear.wav"},
+    {"text": "He was still in the forest!", "sid": "5", "ref_img1_path": "./static/demo_image/zero_shot/1_4.jpg", "inf_emotion1": "Sadly Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_4_sadandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_5.jpg", "inf_emotion2": "Sadly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_5_sadandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/1_6.jpg", "inf_emotion3": "Sadly Disgusted", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_6_sadanddisgust.wav"},
+    {"text": "He was still in the forest!", "sid": "5", "ref_img1_path": "./static/demo_image/zero_shot/1_7.jpg", "inf_emotion1": "Fearfully Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_7_fearandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_8.jpg", "inf_emotion2": "Fearfully Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_8_fearandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/1_9.jpg", "inf_emotion3": "Angrily Surprised", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_9_angryandsurprise.wav"},
+    {"text": "He was still in the forest!", "sid": "5", "ref_img1_path": "./static/demo_image/zero_shot/1_10.jpg", "inf_emotion1": "Angrily Disgusted", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_10_angryanddisgust.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_11.jpg", "inf_emotion2": "Disgustingly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_1_11_disgustandsurprise.wav", "ref_img3_path": "", "inf_emotion3": "", "MMTTS_audio3_path": ""},
+    {"text": "He was still in the forest!", "sid": "4", "ref_img1_path": "./static/demo_image/zero_shot/1_1.jpg", "inf_emotion1": "Happily Surprised", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_1_happyandsurprise.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_2.jpg", "inf_emotion2": "Happily Disgusted", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_2_happyanddisgust.wav", "ref_img3_path": "./static/demo_image/zero_shot/1_3.jpg", "inf_emotion3": "Sadly Fearful", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_3_sadandfear.wav"},
+    {"text": "He was still in the forest!", "sid": "4", "ref_img1_path": "./static/demo_image/zero_shot/1_4.jpg", "inf_emotion1": "Sadly Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_4_sadandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_5.jpg", "inf_emotion2": "Sadly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_5_sadandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/1_6.jpg", "inf_emotion3": "Sadly Disgusted", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_6_sadanddisgust.wav"},
+    {"text": "He was still in the forest!", "sid": "4", "ref_img1_path": "./static/demo_image/zero_shot/1_7.jpg", "inf_emotion1": "Fearfully Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_7_fearandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_8.jpg", "inf_emotion2": "Fearfully Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_8_fearandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/1_9.jpg", "inf_emotion3": "Angrily Surprised", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_9_angryandsurprise.wav"},
+    {"text": "He was still in the forest!", "sid": "4", "ref_img1_path": "./static/demo_image/zero_shot/1_10.jpg", "inf_emotion1": "Angrily Disgusted", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_10_angryanddisgust.wav", "ref_img2_path": "./static/demo_image/zero_shot/1_11.jpg", "inf_emotion2": "Disgustingly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_3_11_disgustandsurprise.wav", "ref_img3_path": "", "inf_emotion3": "", "MMTTS_audio3_path": ""},
+    {"text": "She was born on the April nineteen forty three.", "sid": "7", "ref_img1_path": "./static/demo_image/zero_shot/2_1.jpg", "inf_emotion1": "Happily Surprised", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_1_happyandsurprise.wav", "ref_img2_path": "./static/demo_image/zero_shot/2_2.jpg", "inf_emotion2": "Happily Disgusted", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_2_happyanddisgust.wav", "ref_img3_path": "./static/demo_image/zero_shot/2_3.jpg", "inf_emotion3": "Sadly Fearful", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_3_sadandfear.wav"},
+    {"text": "She was born on the April nineteen forty three.", "sid": "7", "ref_img1_path": "./static/demo_image/zero_shot/2_4.jpg", "inf_emotion1": "Sadly Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_4_sadandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/2_5.jpg", "inf_emotion2": "Sadly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_5_sadandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/2_6.jpg", "inf_emotion3": "Sadly Disgusted", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_6_sadanddisgust.wav"},
+    {"text": "She was born on the April nineteen forty three.", "sid": "7", "ref_img1_path": "./static/demo_image/zero_shot/2_7.jpg", "inf_emotion1": "Fearfully Angry", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_7_fearandangry.wav", "ref_img2_path": "./static/demo_image/zero_shot/2_8.jpg", "inf_emotion2": "Fearfully Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_8_fearandsurprise.wav", "ref_img3_path": "./static/demo_image/zero_shot/2_9.jpg", "inf_emotion3": "Angrily Surprised", "MMTTS_audio3_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_9_angryandsurprise.wav"},
+    {"text": "She was born on the April nineteen forty three.", "sid": "7", "ref_img1_path": "./static/demo_image/zero_shot/2_10.jpg", "inf_emotion1": "Angrily Disgusted", "MMTTS_audio1_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_10_angryanddisgust.wav", "ref_img2_path": "./static/demo_image/zero_shot/2_11.jpg", "inf_emotion2": "Disgustingly Surprised", "MMTTS_audio2_path": "./static/demo_audio/zero_shot/MetaEmoTTS_2_11_disgustandsurprise.wav", "ref_img3_path": "", "inf_emotion3": "", "MMTTS_audio3_path": ""},
+]
+
+
 emotionColor = {
-    Neutral: '#d4d4d4',
-    Joy: '#ffdfaf',
-    Sadness: '#b2ccff',
-    Surprise: '#cc6aff',
-    Disgust: '#3ccf3c',
-    Happy: 'ffdfaf',
-    Sad: '#b2ccff',
-    Angry: '#ff7f7f'
+    'Neutral': '#a0a0a0',
+    'Joy': '#ffbf7f',
+    'Sadness': '#8fb2ff',
+    'Surprise': '#b266ff',
+    'Disgust': '#29a329',
+    'Happy': '#ffbf7f',
+    'Sad': '#8fb2ff',
+    'Angry': '#ff4c4c',
+
+    'Happily': '#ffbf7f',
+    'Sadly': '#8fb2ff',
+    'Fearful': '#ff7f00',
+    'Fearfully': '#ff7f00',
+    'Angry': '#ff4c4c',
+    'Angrily': '#ff4c4c',
+    'Disgusted': '#29a329',
+    'Disgustingly': '#29a329',
+    'Surprised': '#b266ff',
 }
 
 function createVSTable(data){
@@ -159,7 +190,80 @@ function createETTSTable(data) {
     }
 }
 
+function createZSTable(data) {
+    var table = document.getElementById("ZS_table").getElementsByTagName("tbody")[0];
+    for (var i = 0; i < data.length; i++){
+        var row = table.insertRow();
+        var textCell = row.insertCell(0);
+        var sidCell = row.insertCell(1);
+        var refImg1Cell = row.insertCell(2);
+        var infEmotion1Cell = row.insertCell(3);
+        var MMTTSAudio1Cell = row.insertCell(4);
+        var refImg2Cell = row.insertCell(5);
+        var infEmotion2Cell = row.insertCell(6);
+        var MMTTSAudio2Cell = row.insertCell(7);
+        var refImg3Cell = row.insertCell(8);
+        var infEmotion3Cell = row.insertCell(9);
+        var MMTTSAudio3Cell = row.insertCell(10);
+
+        var text = document.createTextNode(data[i].text);
+        textCell.appendChild(text);
+
+        var sid = document.createTextNode(data[i].sid);
+        sidCell.appendChild(sid);
+
+        var refImg1 = document.createElement("img");
+        refImg1.src = data[i].ref_img1_path;
+        refImg1.width = 224;
+        refImg1Cell.appendChild(refImg1);
+
+        var infEmotion1 = document.createTextNode(data[i].inf_emotion1);
+        infEmotion1Cell.appendChild(infEmotion1);
+
+        var emotion1Colors = data[i].inf_emotion1.split(' ').map(emotion => emotionColor[emotion]);
+        infEmotion1Cell.style.background = `linear-gradient(to right, ${emotion1Colors.join(', ')})`;
+
+        var MMTTSAudio1 = document.createElement("audio");
+        MMTTSAudio1.src = data[i].MMTTS_audio1_path;
+        MMTTSAudio1.controls = true;
+        MMTTSAudio1Cell.appendChild(MMTTSAudio1);
+
+        var refImg2 = document.createElement("img");
+        refImg2.src = data[i].ref_img2_path;
+        refImg2.width = 224;
+        refImg2Cell.appendChild(refImg2);
+
+        var infEmotion2 = document.createTextNode(data[i].inf_emotion2);
+        infEmotion2Cell.appendChild(infEmotion2);
+        var emotion2Colors = data[i].inf_emotion2.split(' ').map(emotion => emotionColor[emotion]);
+        infEmotion2Cell.style.background = `linear-gradient(to right, ${emotion2Colors.join(', ')})`;
+
+        var MMTTSAudio2 = document.createElement("audio");
+        MMTTSAudio2.src = data[i].MMTTS_audio2_path;
+        MMTTSAudio2.controls = true;
+        MMTTSAudio2Cell.appendChild(MMTTSAudio2);
+
+        if (data[i].ref_img3_path != "") {
+            var refImg3 = document.createElement("img");
+            refImg3.src = data[i].ref_img3_path;
+            refImg3.width = 224;
+            refImg3Cell.appendChild(refImg3);
+
+            var infEmotion3 = document.createTextNode(data[i].inf_emotion3);
+            infEmotion3Cell.appendChild(infEmotion3);
+            var emotion3Colors = data[i].inf_emotion3.split(' ').map(emotion => emotionColor[emotion]);
+            infEmotion3Cell.style.background = `linear-gradient(to right, ${emotion3Colors.join(', ')})`;
+
+            var MMTTSAudio3 = document.createElement("audio");
+            MMTTSAudio3.src = data[i].MMTTS_audio3_path;
+            MMTTSAudio3.controls = true;
+            MMTTSAudio3Cell.appendChild(MMTTSAudio3);
+        }
+    }
+}
+
 window.onload = function(){
     createVSTable(VSdata)
     createETTSTable(ETTS_data)
+    createZSTable(ZS_data)
 }

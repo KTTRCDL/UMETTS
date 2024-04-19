@@ -17,17 +17,16 @@
     <main>
         <div class="section">
             <h2>Voiceover Scenario</h2>
-            <!-- display for 3 rows, the first row with no sound video, the second is the man actor audio, the third row is the woman acotr audio -->
             <table id="VS_table">
                 <thead>
                     <tr>
-                        <th>Origin video without sound</th>
-                        <th>Origin face image</th>
-                        <th>Origin speech</th>
-                        <th>Origin text</th>
-                        <th>EPAlign infered emotion</th>
-                        <th>EMITTS generated speech (Speaker0)</th>
-                        <th>EMITTS generated speech (Speaker1)</th>
+                        <th>Origin Video without Sound</th>
+                        <th>Origin Face Image</th>
+                        <th>Origin Speech</th>
+                        <th>Origin Text</th>
+                        <th>EPAlign Infered Emotion</th>
+                        <th>EMITTS Generated Speech (Speaker0)</th>
+                        <th>EMITTS Generated Speech (Speaker1)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,12 +35,11 @@
         </div>
         <div class="section">
             <h2>Emotional Text-to-Speech Synthesis</h2>
-            <!-- display for 3 rows, the first row with no sound video, the second is the man actor audio, the third row is the woman acotr audio -->
             <table id="ETTS_table">
                 <thead>
                     <tr>
                         <th>Text</th>
-                        <th>Speaker id</th>
+                        <th>Speaker ID</th>
                         <th>Emotion</th>
                         <th>Origin</th>
                         <th>VITS (label)</th>
@@ -50,6 +48,28 @@
                         <th>MM-TTS (Tacotron)</th>
                         <th>EmoSpeech</th>
                         <th>MM-TTS (FastSpeech)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h2>Zero-Shot Emotional Speech</h2>
+            <table id="ZS_table">
+                <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>Speaker ID</th>
+                        <th>Reference Emotion Image</th>
+                        <th>MM-TTS (EPAlign) Infered Emotion</th>
+                        <th>MM-TTS (EMITTS) Generated Speech</th>
+                        <th>Reference Emotion Image</th>
+                        <th>MM-TTS (EPAlign) Infered Emotion</th>
+                        <th>MM-TTS (EMITTS) Generated Speech</th>
+                        <th>Reference Emotion Image</th>
+                        <th>MM-TTS (EPAlign) Infered Emotion</th>
+                        <th>MM-TTS (EMITTS) Generated Speech</th>
                     </tr>
                 </thead>
                 <tbody>
