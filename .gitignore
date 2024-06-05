@@ -1,4 +1,6 @@
 EPAlign/ckpt/*
+EPAlign/log/*
+data/*
 # Logs
 logs
 *.log
