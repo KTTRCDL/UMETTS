@@ -1,6 +1,3 @@
-[submodule "CLIP"]
-	path = CLIP
-	url = https://github.com/openai/CLIP.git
 [submodule "EPAlign/CLIP"]
 	path = EPAlign/CLIP
 	url = https://github.com/openai/CLIP.git
