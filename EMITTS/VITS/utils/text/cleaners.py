@@ -90,14 +90,22 @@ def english_cleaners(text):
   phonemes = collapse_whitespace(phonemes)
   return phonemes
 
-
+# modify to better use phonemize
 def english_cleaners2(text):
   '''Pipeline for English text, including abbreviation expansion. + punctuation + stress'''
-  text = convert_to_ascii(text)
-  text = lowercase(text)
-  text = expand_abbreviations(text)
+  if type(text) == list:
+    for i in range(len(text)):
+      text[i] = convert_to_ascii(text[i])
+      text[i] = lowercase(text[i])
+      text[i] = expand_abbreviations(text[i])
+  else:
+    text = expand_abbreviations(text)
   # phonemize include number process
   phonemes = phonemize(text, language='en-us', backend='espeak', strip=True, preserve_punctuation=True, with_stress=True)
-  phonemes = collapse_whitespace(phonemes)
+  if type(text) == list:
+    for i in range(len(phonemes)):
+      phonemes[i] = collapse_whitespace(phonemes[i])
+  else:
+    phonemes = collapse_whitespace(phonemes)
   return phonemes
 

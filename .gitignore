@@ -131,3 +131,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+EPAlign/mmefeature/*/
+EMITTS/filelist/ESD/*
+EPAlign/script/EPAlign_prompt_audio_finetune.ipynb

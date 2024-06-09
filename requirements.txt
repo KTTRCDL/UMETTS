@@ -7,3 +7,7 @@ torchaudio
 librosa
 pillow
 pandas
+unidecode
+phonemizer
+inflect
+transformers

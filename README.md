@@ -28,21 +28,32 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
     ```
 2. Install python requirements. Please refer [requirements.txt](requirements.txt) for the complete list of dependencies.
     ```shell
-    # PIP
+    # requirements.txt
     pip install -r requirements.txt
+    # CLIP
+    pip install EPAlign/CLIP
     ```
 3. Download datasets
     - Download and extract the Emotion Speech Dataset (ESD) following the instructions in the official repository [Emotional-Speech-Data](https://github.com/HLTSingapore/Emotional-Speech-Data)
     - Download and extract the Real-world Expression Database (RAF-DB) following the instructions in the official website [Real-world Affective Faces Database](http://www.whdeng.cn/raf/model1.html)
     - Download and extract the [Multimodal EmotionLines Dataset (MELD)](http://web.eecs.umich.edu/~mihalcea/downloads/MELD.Raw.tar.gz)
 4. Preprocess the datasets
+    - ESD: follow the jupyter notebook [preprocess/ESD.ipynb](preprocess/ESD.ipynb)
+    <!-- - MELD: follow the jupyter notebook [preprocess/MELD.ipynb](preprocess/MELD.ipynb) -->
+
+## Train & Finetune
+### Emotion Prompt Alignment Module (EP-Align)
+1. Train the model
     ```shell
     # ESD
-
+    
     # RAF-DB
 
     # MELD
     ```
-5. Train the model
-    ```shell
-    ```
+
+2. Extract the aligned emotional features
+    
+    follow the jupyter notebook [EPAlign/script/extract_emofeature.ipynb](EPAlign/script/extract_emofeature.ipynb)
+
+### Emotion Embedding-Induced TTS (EMI-TTS)
