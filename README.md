@@ -21,10 +21,10 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
 1. Clone this repository
     ```shell
     # SSH
-    git clone git@github.com:KTTRCDL/MMTTS.git
+    git clone --recursive git@github.com:KTTRCDL/MMTTS.git
 
     # HTTPS
-    git clone https://github.com/KTTRCDL/MMTTS.git
+    git clone --recursive https://github.com/KTTRCDL/MMTTS.git
     ```
 2. Install python requirements. Please refer [requirements.txt](requirements.txt) for the complete list of dependencies.
     ```shell
