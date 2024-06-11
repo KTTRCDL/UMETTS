@@ -46,7 +46,7 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
 1. Train the model
     ```shell
     # ESD
-    
+
     # RAF-DB
 
     # MELD
@@ -57,3 +57,13 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
     follow the jupyter notebook [EPAlign/script/extract_emofeature.ipynb](EPAlign/script/extract_emofeature.ipynb)
 
 ### Emotion Embedding-Induced TTS (EMI-TTS)
+1. Train the model
+    ```shell
+    # Variant VITS
+    # Cython-version Monotonoic Alignment Search
+    cd EMITTS/VITS/model/monotonic_align
+    python setup.py build_ext --inplace
+    cd ../..
+    # path/to/json e.g. config/esd_en_e5.json, 
+    python train.py -c path/to/json -m esd_en
+    ```

@@ -381,23 +381,23 @@ class SynthesizerTrn(nn.Module):
                                        n_layers,
                                        kernel_size,
                                        p_dropout)
+        self.posteriorEncoder = PosteriorEncoder(spec_channels,
+                                                 inter_channels,
+                                                 hidden_channels,
+                                                 kernel_size=5,
+                                                 dilation_rate=1,
+                                                 n_layers=16,
+                                                 sin_channels=sin_channels,
+                                                 ein_channels=ein_channels)
         # posterir Encoder w/o emotion
         # self.posteriorEncoder = PosteriorEncoder(spec_channels,
-        #                                          inter_channels,
-        #                                          hidden_channels,
-        #                                          kernel_size=5,
-        #                                          dilation_rate=1,
-        #                                          n_layers=16,
-        #                                          sin_channels=sin_channels,
-        #                                          ein_channels=ein_channels)
-        self.posteriorEncoder = PosteriorEncoder(spec_channels,
-                                            inter_channels,
-                                            hidden_channels,
-                                            kernel_size=5,
-                                            dilation_rate=1,
-                                            n_layers=16,
-                                            sin_channels=sin_channels,
-                                            ein_channels=0)
+        #                                     inter_channels,
+        #                                     hidden_channels,
+        #                                     kernel_size=5,
+        #                                     dilation_rate=1,
+        #                                     n_layers=16,
+        #                                     sin_channels=sin_channels,
+        #                                     ein_channels=0)
         self.flow = ResidualCouplingBlock(inter_channels,
                                           hidden_channels,
                                           5, 1, 4,
@@ -410,6 +410,15 @@ class SynthesizerTrn(nn.Module):
                                                                        n_flows=4,
                                                                        sin_channels=sin_channels,
                                                                        ein_channels=ein_channels)
+        self.vocoder = Vocoder(inter_channels,
+                               resblock,
+                               resblock_kernel_sizes,
+                               resblock_dilation_sizes,
+                               upsample_rates,
+                               upsample_initial_channel,
+                               upsample_kernel_sizes,
+                               sin_channels=sin_channels,
+                               ein_channels=ein_channels)
         # vocoder w/o emotion
         # self.vocoder = Vocoder(inter_channels,
         #                        resblock,
@@ -419,16 +428,7 @@ class SynthesizerTrn(nn.Module):
         #                        upsample_initial_channel,
         #                        upsample_kernel_sizes,
         #                        sin_channels=sin_channels,
-        #                        ein_channels=ein_channels)
-        self.vocoder = Vocoder(inter_channels,
-                               resblock,
-                               resblock_kernel_sizes,
-                               resblock_dilation_sizes,
-                               upsample_rates,
-                               upsample_initial_channel,
-                               upsample_kernel_sizes,
-                               sin_channels=sin_channels,
-                               ein_channels=0)
+        #                        ein_channels=0)
 
     def forward(self, x, x_lengths, y, y_lengths, sid=None, efeature=None):
         x, m_p, logs_p, x_mask = self.textEncoder(x, x_lengths)

@@ -36,10 +36,12 @@ global_step = 0
 
 
 def main():
+    # set environment GPU
+    # os.environ['CUDA_VISIBLE_DEVICES'] = '1,2,3'
     assert torch.cuda.is_available()
     ngpus = torch.cuda.device_count()
     os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '80010'
+    os.environ['MASTER_PORT'] = '8777'
     hps = utils.get_hparams()
     mp.spawn(run, nprocs=ngpus, args=(ngpus, hps))
 

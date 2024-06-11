@@ -14,6 +14,7 @@ lerna-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
+__pycache__
 pids
 *.pid
 *.seed
@@ -134,4 +135,6 @@ dist
 
 EPAlign/mmefeature/*/
 EMITTS/filelist/ESD/*
-EPAlign/script/EPAlign_prompt_audio_finetune.ipynb
+EMITTS/VITS/model/monotonic_align/monotonic_align.egg-info
+EMITTS/VITS/model/monotonic_align/build
+EMITTS/VITS/model/monotonic_align/monotonic_align/*.so

@@ -11,3 +11,6 @@ unidecode
 phonemizer
 inflect
 transformers
+tensorboard
+Cython
+matplotlib
