@@ -37,7 +37,7 @@ global_step = 0
 
 def main():
     # set environment GPU
-    # os.environ['CUDA_VISIBLE_DEVICES'] = '1,2,3'
+    # os.environ['CUDA_VISIBLE_DEVICES'] = '3'
     assert torch.cuda.is_available()
     ngpus = torch.cuda.device_count()
     os.environ['MASTER_ADDR'] = 'localhost'

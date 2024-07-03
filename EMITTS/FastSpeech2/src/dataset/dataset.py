@@ -11,7 +11,7 @@ from src.utils.fastspeech_utils import pad_1d, pad_2d
 
 
 def get_dataloader(
-    config: TrainConfig, mode: str, size: int = None, is_emotion_feature=False,
+    config: TrainConfig, mode: str, size: int = None
 ) -> torch.utils.data.DataLoader:
     txt_name = f"{mode}.txt"
     shuffle = True if "train" in txt_name else False
@@ -19,7 +19,7 @@ def get_dataloader(
     batch_size = config.train_batch_size if mode == "train" else config.val_batch_size
     # modify: add is_emotion_feature
     dataset = Dataset(
-        filename=txt_name, cfg=config, sort=sort, batch_size=batch_size, size=size, is_emotion_feature=is_emotion_feature
+        filename=txt_name, cfg=config, sort=sort, batch_size=batch_size, size=size, is_emotion_feature=config.is_emotion_feature
     )
     loader = DataLoader(
         dataset,
@@ -46,7 +46,8 @@ class Dataset(torch.utils.data.Dataset):
     ):
         self.preprocessed_path = cfg.preprocessed_data_path
         self.batch_size = batch_size
-        self.speaker_id, self.file_id, self.emotion_id, self.text = self.process_meta(
+        self.n_speakers = cfg.n_speakers
+        self.speaker_id, self.file_name, self.text, self.emotion_path = self.process_meta(
             filename
         )
         with open(Path(self.preprocessed_path) / "phones.json", "r") as f:
@@ -69,13 +70,12 @@ class Dataset(torch.utils.data.Dataset):
 
     def __getitem__(self, idx: int) -> dict:
         speaker_id = self.speaker_id[idx]
-        file_id = self.file_id[idx]
-        emotion_id = self.emotion_id[idx]
+        file_name = self.file_name[idx]
+        emotion_path = self.emotion_path[idx]
         phone = np.array(
             [self.phones_mapping[i] for i in self.text[idx][1:-1].split(" ")]
         )
-        basename = f"{speaker_id}_{file_id}_{emotion_id}"
-
+        basename = file_name
         if self.n_egemap_features > 0:
             egemap_feature = np.load(
                 str(Path(self.preprocessed_path) / "egemap" / f"{basename}.npy"),
@@ -107,19 +107,27 @@ class Dataset(torch.utils.data.Dataset):
 
         # modify, add if-else
         if self.is_emotion_feature:
-            eid2emotion = {
-                0: "neutral",
-                1: "angry",
-                2: "happy",
-                3: "sad",
-                4: "surprise"
-            }
-            ef_path = "path/to/mmefeatures"
-            emotion_feature = torch.load(f'{ef_path}/{eid2emotion[emotion_id]}.pt', map_location='cpu')
+            # eid2emotion = {
+            #     0: "neutral",
+            #     1: "angry",
+            #     2: "happy",
+            #     3: "sad",
+            #     4: "surprise"
+            # }
+            # ef_path = "path/to/mmefeatures"
+            if 'ESD' in emotion_path:
+                emotion2eid = {
+                    "neutral": 0,
+                    "angry": 1,
+                    "happy": 2,
+                    "sad": 3,
+                    "surprise": 4
+                }
+            emotion_feature = torch.load(emotion_path, map_location='cpu')
             sample = {
                 "id": basename,
                 "speaker": speaker_id,
-                "emotion": emotion_id,
+                "emotion": emotion2eid[emotion_path.split("/")[-1].split(".")[0]],
                 "mel": mel,
                 "pitch": pitch,
                 "energy": energy,
@@ -128,31 +136,21 @@ class Dataset(torch.utils.data.Dataset):
                 "egemap_feature": egemap_feature,
                 "emotion_feature": emotion_feature
             }
-        else:
-            sample = {
-                "id": basename,
-                "speaker": speaker_id,
-                "emotion": emotion_id,
-                "mel": mel,
-                "pitch": pitch,
-                "energy": energy,
-                "duration": duration,
-                "text": phone,
-                "egemap_feature": egemap_feature,
-            }
 
         return sample
 
     def process_meta(self, filename: str) -> Tuple[np.ndarray, ...]:
         with open(Path(self.preprocessed_path) / filename, "r", encoding="utf-8") as f:
-            speaker, name, emotion, text = [], [], [], []
+            speaker, name, text, emotion = [], [], [], []
             for line in f.readlines():
-                s, n, e, t, _ = line.strip("\n").split("|")
-                name.append(int(n))
-                speaker.append(int(s))
-                emotion.append(int(e))
+                s, n, t, _, e = line.strip("\n").split("|")
+                name.append(f'{s}_{n}')
+                # special for ESD (en) dataset (with 10 speakers and 5 emotions)
+                if self.n_speakers == 10:
+                    speaker.append(int(s)-self.n_speakers)
                 text.append(t)
-            return np.array(speaker), np.array(name), np.array(emotion), np.array(text)
+                emotion.append(e)
+            return np.array(speaker), np.array(name), np.array(text), np.array(emotion)
 
     @staticmethod
     def reprocess(data: List[dict], indexes: List) -> Tuple[Any, ...]:
@@ -197,8 +195,8 @@ class Dataset(torch.utils.data.Dataset):
         speakers = torch.Tensor([data[idx]["speaker"] for idx in indexes]).long()
         emotions = torch.Tensor([data[idx]["emotion"] for idx in indexes]).long()
 
-        # modify judge if emotion_feature exist
-        if "emotion_feature" in data[0]:
+        # modify judge if emotion_feature exists
+        if "emotion_feature" in data[0].keys():
             emotion_features = torch.stack([data[idx]["emotion_feature"] for idx in indexes]).float()
             return (
                 ids,
@@ -213,20 +211,6 @@ class Dataset(torch.utils.data.Dataset):
                 durations,
                 egemap_features,
                 emotion_features
-            )
-        else:
-            return (
-                ids,
-                speakers,
-                emotions,
-                texts,
-                text_lens,
-                mels,
-                mel_lens,
-                pitches,
-                energies,
-                durations,
-                egemap_features,
             )
 
     def collate_fn(self, data: List[dict]) -> List[Tuple[Any]]:
@@ -244,5 +228,4 @@ class Dataset(torch.utils.data.Dataset):
         if not self.drop_last and len(tail) > 0:
             idx_arr.extend([tail.tolist()])
         output = [self.reprocess(data, idx) for idx in idx_arr]
-
         return output

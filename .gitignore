@@ -15,6 +15,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
 __pycache__
+**/__pycache__/
+**/__pycache__/*
 pids
 *.pid
 *.seed
@@ -138,3 +140,4 @@ EMITTS/filelist/ESD/*
 EMITTS/VITS/model/monotonic_align/monotonic_align.egg-info
 EMITTS/VITS/model/monotonic_align/build
 EMITTS/VITS/model/monotonic_align/monotonic_align/*.so
+EMITTS/FastSpeech2/wandb

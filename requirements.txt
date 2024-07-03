@@ -14,3 +14,12 @@ transformers
 tensorboard
 Cython
 matplotlib
+
+opensmile
+
+pyworld
+tgt
+loguru
+
+lightning
+wandb

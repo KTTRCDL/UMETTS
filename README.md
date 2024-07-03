@@ -40,17 +40,11 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
 4. Preprocess the datasets
     - ESD: follow the jupyter notebook [preprocess/ESD.ipynb](preprocess/ESD.ipynb)
     <!-- - MELD: follow the jupyter notebook [preprocess/MELD.ipynb](preprocess/MELD.ipynb) -->
-
 ## Train & Finetune
 ### Emotion Prompt Alignment Module (EP-Align)
 1. Train the model
-    ```shell
-    # ESD
-
-    # RAF-DB
-
-    # MELD
-    ```
+    
+    follow the jupyter notebook [EPAlign/script/EPAlign_prompt_audio_finetune.ipynb](EPAlign/script/EPAlign_prompt_audio_finetune.ipynb), [EPAlign/script/EPAlign_prompt_vision_finetune.ipynb](EPAlign/script/EPAlign_prompt_vision_finetune.ipynb) and [EPAlign/script/EPAlign_finetune.ipynb](EPAlign/script/EPAlign_finetune.ipynb)
 
 2. Extract the aligned emotional features
     
@@ -66,4 +60,9 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
     cd ../..
     # path/to/json e.g. config/esd_en_e5.json, 
     python train.py -c path/to/json -m esd_en
+
+    # Variant FastSpeech2
+    cd EMITTS/FastSpeech2
+    # need to change some path config in EMITTS/FastSpeech2/config/config.py file
+    python -m src.scripts.train
     ```

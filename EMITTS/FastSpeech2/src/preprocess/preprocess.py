@@ -17,10 +17,10 @@ from scipy.interpolate import interp1d
 from scipy.io import wavfile
 from sklearn.preprocessing import StandardScaler
 
-from config.config import TrainConfig
-from src.dataset.compute_mel import ComputeMelEnergy, PAD_MEL_VALUE
-from src.utils.multiprocess_utils import run_pool
-from src.utils.utils import write_txt, set_up_logger, crash_with_msg
+from EMITTS.FastSpeech2.config.config import TrainConfig
+from EMITTS.FastSpeech2.src.dataset.compute_mel import ComputeMelEnergy, PAD_MEL_VALUE
+from EMITTS.FastSpeech2.src.utils.multiprocess_utils import run_pool
+from EMITTS.FastSpeech2.src.utils.utils import write_txt, set_up_logger, crash_with_msg
 
 
 class Preprocessor:
@@ -42,8 +42,9 @@ class Preprocessor:
             self.phones_mapping[punc_symbol] = self.phones_id_counter
         self.compute_mel_energy = ComputeMelEnergy(**asdict(config))
         self.compiled_regular_expression = re.compile(r"[\w']+|[.,!?;]")
-        self.val_ids = np.genfromtxt(config.val_ids_path, delimiter="|", dtype=str)
-        self.test_ids = np.genfromtxt(config.test_ids_path, delimiter="|", dtype=str)
+        self.val_ids = self.get_audio_ids(config.val_ids_path)
+        self.test_ids = self.get_audio_ids(config.test_ids_path)
+        self.audioname_emotion = self.get_audioname_emotion_dict(config.train_ids_path, config.val_ids_path, config.test_ids_path)
         self.opensmile = opensmile.Smile(
             feature_set=opensmile.FeatureSet.eGeMAPSv02,
             feature_level=opensmile.FeatureLevel.Functionals,
@@ -68,14 +69,33 @@ class Preprocessor:
             parents=True, exist_ok=True
         )
 
+    def get_audio_ids(self, filelistname: str):
+        """
+        Method extracts speaker_id, filename_id and emotion_id from the filename
+        :param filename: str, filename without extension
+        :return: NDArray audio_ids 
+        """
+        return np.array(
+            [
+                f"{f.split('|')[0].split('/')[-1].split('.')[0]}"
+                for f in open(filelistname).read().splitlines()
+            ], dtype=str
+        )
+
+    def get_audioname_emotion_dict(self, train_ids_path: str, val_ids_path: str, test_ids_path: str):
+        audioname_emotion_dict = {}
+        for filelistname in [train_ids_path, val_ids_path, test_ids_path]:
+            for f in open(filelistname).read().splitlines():
+                audioname_emotion_dict[f.split('|')[0].split('/')[-1].split('.')[0]] = f.split('|')[-1]
+        return audioname_emotion_dict
+
     def _run(self, filename: str):
         """
         Method is called in multi-processes pool and calls process_utterance for each sample;
         :param filename: str, .TextGrid filename
         :return: None
         """
-        basename = filename[:-9].split("/")[-1]
-        speaker_idx, filename_idx, emotion_id = basename.split("_")
+        basename = filename.split("/")[-1].split(".")[0]
 
         tg_path = Path(self.config.raw_data_path, basename).with_suffix(".TextGrid")
         wav_path = Path(self.config.raw_data_path, basename).with_suffix(".wav")
@@ -189,15 +209,15 @@ class Preprocessor:
         metadata = [r for r in metadata if r is not None]
         train_set, val_set, test_set = [], [], []
         for sample in metadata:
-            speaker_idx, filename_idx, emotion_idx, text, raw_text = sample.split("|")
+            speaker_idx, filename_idx, text, raw_text, mmefeaure = sample.split("|")
             text = text[1:-1].split(" ")
             for phone in text:
                 if phone not in self.phones_mapping:
                     self.phones_id_counter += 1
                     self.phones_mapping[phone] = self.phones_id_counter
-            if f"{speaker_idx}_{filename_idx}_{emotion_idx}" in self.val_ids:
+            if f"{speaker_idx}_{filename_idx}" in self.val_ids:
                 val_set.append(sample)
-            elif f"{speaker_idx}_{filename_idx}_{emotion_idx}" in self.test_ids:
+            elif f"{speaker_idx}_{filename_idx}" in self.test_ids:
                 test_set.append(sample)
             else:
                 train_set.append(sample)
@@ -222,7 +242,7 @@ class Preprocessor:
         :param wav_path: Path, path to .wav file
         :param txt_path: Path, path to .txt file
         :return: List:
-                    - str, speaker_idx|filename_idx|emotion_idx|phones|text
+                    - str, speaker_idx|filename_idx|phones|text|mmefeaure_path
                     - 4 np.ndarray (pitch, egemap features, energy, mel spectrogram)
                 or None in case couldn't open one of the files
         """
@@ -276,13 +296,13 @@ class Preprocessor:
         wav = wav[
             int(self.config.sample_rate * start) : int(self.config.sample_rate * end)
         ].astype(np.float32)
-        speaker_idx, filename_idx, emotion_idx = basename.split("_")
+        speaker_idx, filename_idx = basename.split("_")
 
         # Extract min speaker id from speakers so that ids starts from 0
         trimmed_wav_filename = Path(
             self.config.preprocessed_data_path,
             "trimmed_wav",
-            f"{speaker_idx}_{filename_idx}_{emotion_idx}.wav",
+            f"{speaker_idx}_{filename_idx}.wav",
         )
         wavfile.write(trimmed_wav_filename, self.config.sample_rate, wav)
 
@@ -365,8 +385,8 @@ class Preprocessor:
         pitch = self.phoneme_level_averaging(duration, pitch)
         energy = self.phoneme_level_averaging(duration, energy)
         # Save files
-        speaker_idx, file_idx, emotion_idx = basename.split("_")
-        numpy_filename = f"{speaker_idx}_{file_idx}_{emotion_idx}.npy"
+        speaker_idx, file_idx = basename.split("_")
+        numpy_filename = f"{speaker_idx}_{file_idx}.npy"
         np.save(
             str(Path(self.config.preprocessed_data_path, "duration", numpy_filename)),
             duration,
@@ -387,7 +407,7 @@ class Preprocessor:
             str(Path(self.config.preprocessed_data_path, "egemap", numpy_filename)),
             egemap_features,
         )
-        res_string = "|".join([speaker_idx, filename_idx, emotion_idx, text, raw_text])
+        res_string = "|".join([speaker_idx, filename_idx, text, raw_text, self.audioname_emotion[basename]])
         removed_outlier_pitch = self.remove_outlier(pitch)
         removed_outlier_energy = self.remove_outlier(energy)
         return (

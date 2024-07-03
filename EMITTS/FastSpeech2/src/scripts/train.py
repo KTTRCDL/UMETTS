@@ -1,9 +1,6 @@
 from dataclasses import asdict
 from pathlib import Path
 
-# import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = '0'
-
 import torch
 from lightning import seed_everything, Trainer
 from lightning.pytorch.callbacks import (

@@ -162,20 +162,25 @@ class FastSpeechLightning(LightningModule):
         if validation:
             mels, mel_lens, pitches, energies, durations, egemap_features = [None] * 6
         else:
-            mels, mel_lens, pitches, energies, durations, egemap_features = batch[0][5:]
-        batch_dict = {
-            "ids": ids,
-            "speakers": speakers,
-            "emotions": emotions,
-            "texts": texts,
-            "text_lens": text_lens,
-            "mels": mels,
-            "mel_lens": mel_lens,
-            "pitches": pitches,
-            "energies": energies,
-            "durations": durations,
-            "egemap_features": egemap_features,
-        }
+            mels, mel_lens, pitches, energies, durations, egemap_features = batch[0][5:11]
+        
+        # judge if have emotion feature attribute
+        if len(batch[0]) == 12:
+            emotion_features = batch[0][-1]
+            batch_dict = {
+                "ids": ids,
+                "speakers": speakers,
+                "emotions": emotions,
+                "texts": texts,
+                "text_lens": text_lens,
+                "mels": mels,
+                "mel_lens": mel_lens,
+                "pitches": pitches,
+                "energies": energies,
+                "durations": durations,
+                "egemap_features": egemap_features,
+                "emotion_features": emotion_features
+            }
         return batch_dict
 
     def training_step(self, batch: torch.Tensor, batch_idx: int) -> float:
@@ -294,6 +299,9 @@ class FastSpeechLightning(LightningModule):
             # as we save best models monitoring val mos, write 0 to the dict if no audios were generated
             log_dict[f"val_mos/generated_audio_mos_mean"] = torch.FloatTensor([0.0])
 
+        # issue at https://github.com/Lightning-AI/torchmetrics/issues/2477
+        for k, v in log_dict.items():
+            log_dict[k] = v.to('cuda')
         self.log_dict(log_dict, sync_dist=True)
         self.validation_step_outputs.clear()
 
