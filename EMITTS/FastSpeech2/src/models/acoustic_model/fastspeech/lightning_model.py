@@ -300,6 +300,7 @@ class FastSpeechLightning(LightningModule):
             log_dict[f"val_mos/generated_audio_mos_mean"] = torch.FloatTensor([0.0])
 
         # issue at https://github.com/Lightning-AI/torchmetrics/issues/2477
+        # but this may cause CUDA UTL MAX error and finally be zombies processes
         for k, v in log_dict.items():
             log_dict[k] = v.to('cuda')
         self.log_dict(log_dict, sync_dist=True)

@@ -75,6 +75,13 @@ class Preprocessor:
         :param filename: str, filename without extension
         :return: NDArray audio_ids 
         """
+        if 'MEADTTS' in self.config.raw_data_path:
+            ids = []
+            for f in open(filelistname).read().splitlines():
+                filename = f.split('|')[0].split('/')[-1].split('.')[0]
+                speaker_id = int(filename.split('_')[0][1:]) + 40 if 'M' in filename else int(filename.split('_')[0][1:])
+                ids.append(f"{speaker_id}_{filename[len(filename.split('_')[0]) + 1:]}")
+            return np.array(ids, dtype=str)
         return np.array(
             [
                 f"{f.split('|')[0].split('/')[-1].split('.')[0]}"
@@ -215,9 +222,9 @@ class Preprocessor:
                 if phone not in self.phones_mapping:
                     self.phones_id_counter += 1
                     self.phones_mapping[phone] = self.phones_id_counter
-            if f"{speaker_idx}_{filename_idx}" in self.val_ids:
+            if f"{int(speaker_idx)}_{filename_idx}" in self.val_ids or f"{speaker_idx}_{filename_idx}" in self.val_ids:
                 val_set.append(sample)
-            elif f"{speaker_idx}_{filename_idx}" in self.test_ids:
+            elif f"{int(speaker_idx)}_{filename_idx}" in self.test_ids or f"{speaker_idx}_{filename_idx}" in self.test_ids:
                 test_set.append(sample)
             else:
                 train_set.append(sample)
@@ -296,7 +303,13 @@ class Preprocessor:
         wav = wav[
             int(self.config.sample_rate * start) : int(self.config.sample_rate * end)
         ].astype(np.float32)
-        speaker_idx, filename_idx = basename.split("_")
+        speaker_idx = basename.split("_")[0]
+        filename_idx = basename[len(speaker_idx) + 1:]
+
+        if 'M' in speaker_idx:
+            speaker_idx = str(int(speaker_idx[1:]) + 40)
+        if 'W' in speaker_idx:
+            speaker_idx = str(int(speaker_idx[1:]))
 
         # Extract min speaker id from speakers so that ids starts from 0
         trimmed_wav_filename = Path(
@@ -385,7 +398,7 @@ class Preprocessor:
         pitch = self.phoneme_level_averaging(duration, pitch)
         energy = self.phoneme_level_averaging(duration, energy)
         # Save files
-        speaker_idx, file_idx = basename.split("_")
+        speaker_idx, file_idx = speaker_idx, filename_idx
         numpy_filename = f"{speaker_idx}_{file_idx}.npy"
         np.save(
             str(Path(self.config.preprocessed_data_path, "duration", numpy_filename)),

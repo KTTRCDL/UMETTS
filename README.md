@@ -40,29 +40,64 @@ Emotional Text-to-Speech (E-TTS) synthesis has gained significant attention in r
 4. Preprocess the datasets
     - ESD: follow the jupyter notebook [preprocess/ESD.ipynb](preprocess/ESD.ipynb)
     <!-- - MELD: follow the jupyter notebook [preprocess/MELD.ipynb](preprocess/MELD.ipynb) -->
+5. Download the Pretrained Models
+    - [Waveglow](https://drive.google.com/open?id=1rpK8CzAAirq9sWZhe9nlfvxMF1dRgFbF) for Tacotron2 variant
+
 ## Train & Finetune
 ### Emotion Prompt Alignment Module (EP-Align)
 1. Train the model
     
-    follow the jupyter notebook [EPAlign/script/EPAlign_prompt_audio_finetune.ipynb](EPAlign/script/EPAlign_prompt_audio_finetune.ipynb), [EPAlign/script/EPAlign_prompt_vision_finetune.ipynb](EPAlign/script/EPAlign_prompt_vision_finetune.ipynb) and [EPAlign/script/EPAlign_finetune.ipynb](EPAlign/script/EPAlign_finetune.ipynb)
+    follow the jupyter notebook [EPAlign/script/EPAlign_prompt_audio_finetune.ipynb](EPAlign/script/EPAlign_prompt_audio_finetune.ipynb), [EPAlign/script/EPAlign_prompt_vision_finetune.ipynb](EPAlign/script/EPAlign_prompt_vision_finetune.ipynb) and [EPAlign/script/EPAlign_prompt_fuse_finetune.ipynb](EPAlign/script/EPAlign_prompt_fuse_finetune.ipynb)
 
 2. Extract the aligned emotional features
     
     follow the jupyter notebook [EPAlign/script/extract_emofeature.ipynb](EPAlign/script/extract_emofeature.ipynb)
 
 ### Emotion Embedding-Induced TTS (EMI-TTS)
-1. Train the model
-    ```shell
-    # Variant VITS
-    # Cython-version Monotonoic Alignment Search
-    cd EMITTS/VITS/model/monotonic_align
-    python setup.py build_ext --inplace
-    cd ../..
-    # path/to/json e.g. config/esd_en_e5.json, 
-    python train.py -c path/to/json -m esd_en
 
-    # Variant FastSpeech2
-    cd EMITTS/FastSpeech2
-    # need to change some path config in EMITTS/FastSpeech2/config/config.py file
-    python -m src.scripts.train
-    ```
+Train the model
+    
+```shell
+# Variant VITS
+# Cython-version Monotonoic Alignment Search
+cd EMITTS/VITS/model/monotonic_align
+python setup.py build_ext --inplace
+cd ../..
+# path/to/json e.g. config/esd_en_e5.json, 
+python train.py -c path/to/json -m esd_en
+
+# Variant FastSpeech2
+cd EMITTS/FastSpeech2
+# need to change some path config in EMITTS/FastSpeech2/config/config.py file
+python -m src.scripts.train
+
+# Variant Tacotron2
+cd EMITTS/Tacotron2
+python train.py --output_directory=ckpt --log_directory=logs --multi_speaker --multi_emotion --emotion_feature
+```
+
+## Inference
+### Emotion Prompt Alignment Module (EP-Align)
+Follow the jupyter notebook [EPAlign/script/EPAlign_inference.ipynb](EPAlign/script/EPAlign_inference.ipynb)
+### Emotion Embedding-Induced TTS (EMI-TTS)
+  You should train the model to get the checkpoint files and extract the aligned emotional features before inference.
+  - For VITS variant, follow the jupyter notebook [EMITTS/VITS/VITS_variant_inference.ipynb](EMITTS/VITS/VITS_variant_inference.ipynb)
+  - For FastSpeech2 variant, follow the jupyter notebook [EMITTS/FastSpeech2/src/scripts/FastSpeech2_variant_inference.ipynb](EMITTS/FastSpeech2/src/scripts/FastSpeech2_variant_inference.ipynb)
+  - For Tacotron2 variant, follow the jupyter notebook [EMITTS/Tacotron2/Tacotron2_variant_inference.ipynb](EMITTS/Tacotron2/Tacotron2_variant_inference.ipynb)
+
+## Acknowledgement
+
+This repository is based on [CLIP](https://github.com/openai/CLIP), [VITS](https://github.com/jaywalnut310/vits), [Tacotron2](https://github.com/NVIDIA/tacotron2), [FastSpeech2](https://github.com/ming024/FastSpeech2), and references the [Pytorch-DDP](https://github.com/pytorch/examples/tree/main/distributed/ddp-tutorial-series), [emospeech](https://github.com/deepvk/emospeech). We would like to thank the authors of these work for publicly releasing their code.
+
+## Citation
+```
+@misc{guan2024mmttsmultimodalpromptbased,
+      title={MM-TTS: Multi-modal Prompt based Style Transfer for Expressive Text-to-Speech Synthesis}, 
+      author={Wenhao Guan and Yishuang Li and Tao Li and Hukai Huang and Feng Wang and Jiayan Lin and Lingyan Huang and Lin Li and Qingyang Hong},
+      year={2024},
+      eprint={2312.10687},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS},
+      url={https://arxiv.org/abs/2312.10687}, 
+}
+```

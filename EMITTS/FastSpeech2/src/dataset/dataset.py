@@ -123,6 +123,31 @@ class Dataset(torch.utils.data.Dataset):
                     "sad": 3,
                     "surprise": 4
                 }
+            elif 'MEADTTS' in emotion_path:
+                emotion2eid = {
+                    "angry_level_1": 0,
+                    "angry_level_2": 1,
+                    "angry_level_3": 2,
+                    "contempt_level_1": 3,
+                    "contempt_level_2": 4,
+                    "contempt_level_3": 5,
+                    "disgusted_level_1": 6,
+                    "disgusted_level_2": 7,
+                    "disgusted_level_3": 8,
+                    "fear_level_1": 9,
+                    "fear_level_2": 10,
+                    "fear_level_3": 11,
+                    "happy_level_1": 12,
+                    "happy_level_2": 13,
+                    "happy_level_3": 14,
+                    "neutral_level_1": 15,
+                    "sad_level_1": 16,
+                    "sad_level_2": 17,
+                    "sad_level_3": 18,
+                    "surprised_level_1": 19,
+                    "surprised_level_2": 20,
+                    "surprised_level_3": 21,
+                }
             emotion_feature = torch.load(emotion_path, map_location='cpu')
             sample = {
                 "id": basename,
@@ -148,6 +173,8 @@ class Dataset(torch.utils.data.Dataset):
                 # special for ESD (en) dataset (with 10 speakers and 5 emotions)
                 if self.n_speakers == 10:
                     speaker.append(int(s)-self.n_speakers)
+                else:
+                    speaker.append(int(s))
                 text.append(t)
                 emotion.append(e)
             return np.array(speaker), np.array(name), np.array(text), np.array(emotion)

@@ -17,7 +17,7 @@ def compute_mos_per_speaker(d: dict) -> dict:
     res = {}
     res = defaultdict(lambda: [], res)
     for basename, score in zip(list(d.keys()), list(d.values())):
-        speaker, _ = basename.split("_")
+        speaker = basename.split("_")[0]
         res[speaker].append(score)
     mos_dict = {}
     for k, v in zip(list(res.keys()), list(res.values())):

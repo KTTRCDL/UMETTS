@@ -23,6 +23,13 @@ class TrainConfig:
     test_ids_path: Path = "EMITTS/filelist/ESD/esd_en_audio_sid_text_efeature_test_filelist.txt" # path to test filelist, e.g. path/to/audio_sid_text_efeature_test_filelist.txt
     preprocessed_data_path: Path = "../../data/ESD_EN_MFA_preprocessed" # path to save preprocessed data, e.g. path/to/ESD_EN_MFA_preprocessed
 
+    # MEADTTS
+    # raw_data_path: Path = "data/MEADTTS_MFA"
+    # train_ids_path: Path = "EMITTS/filelist/MEADTTS/MEADTTS_audio_sid_text_efeature_train_filelist.txt"
+    # val_ids_path: Path = "EMITTS/filelist/MEADTTS/MEADTTS_audio_sid_text_efeature_val_filelist.txt"
+    # test_ids_path: Path = "EMITTS/filelist/MEADTTS/MEADTTS_audio_sid_text_efeature_test_filelist.txt"
+    # preprocessed_data_path: Path = "../../data/MEADTTS_MFA_preprocessed"
+
     egemap_feature_names: Tuple[str] = ("F0semitoneFrom27.5Hz_sma3nz_percentile50.0",
                                         "F0semitoneFrom27.5Hz_sma3nz_percentile80.0",
                                         "F0semitoneFrom27.5Hz_sma3nz_pctlrange0-2",
@@ -45,6 +52,7 @@ class TrainConfig:
     padding_index: int = 0
     max_seq_len: int = 2000
     phones_mapping_path: Path = "../../data/ESD_EN_MFA_preprocessed/phones.json" # path to phones.json file, e.g. path/to/phones.json
+    # phones_mapping_path: Path = "../../data/MEADTTS_MFA_preprocessed/phones.json"
     transformer_encoder_hidden: int = 512
     transformer_encoder_layer: int = 9
     transformer_encoder_head: int = 2
@@ -84,9 +92,12 @@ class TrainConfig:
     multi_speaker: bool = True
     multi_emotion: bool = True
     n_emotions: int = 5
+    # n_emotions: int = 21
     n_speakers: int = 10
+    # n_speakers: int = 83
     train_batch_size: int = 64
-    val_batch_size: int = 32
+    # train_batch_size: int = 32
+    val_batch_size: int = 64
     device: str = "cuda"
 
     # Train
@@ -94,13 +105,16 @@ class TrainConfig:
     precision: str = 32
     matmul_precision: str = "high"
     lightning_checkpoint_path: str = "ckpt/ESD_en/" # directory to save checkpoints, e.g. path/to/ckpt
+    # lightning_checkpoint_path: str = "ckpt/MEADTTS/" 
     train_from_checkpoint: Optional[str] = None # filename in <lightning_checkpoint_path> directory
     num_workers: int = 35
     test_wav_files_directory: str = "../../data/ESD_EN_MFA_preprocessed/wav" # directory where test wav files are stored, e.g. path/to/wav
     test_mos_files_directory: str = "../../data/ESD_EN_MFA_preprocessed/mos" # directory where test mos files are stored, e.g. path/to/mos (using NISQA)
-    total_training_steps: int = 50000
+    # test_wav_files_directory: str = "../../data/MEADTTS_MFA_preprocessed/wav"
+    # test_mos_files_directory: str = "../../data/MEADTTS_MFA_preprocessed/mos"
+    total_training_steps: int = 5000000
     val_each_epoch: int = 20
-    val_audio_log_each_step: int = 1 # if greater than one will log audio each <n> step, set to save storage
+    val_audio_log_each_step: int = 100 # if greater than one will log audio each <n> step, set to save storage
 
     # Test / Inference
     # testing_checkpoint: str = "path/to/ckpt" #"data/deepvk_large_checkpoint/epoch=1079-step=127440.ckpt"
@@ -123,6 +137,7 @@ class TrainConfig:
     # Wandb
     wandb_log_model: bool = False
     wandb_project: str = "MMTTS_FastSpeech"
+    # wandb_project: str = "MMTTS_FastSpeech2_MEADTTS"
     wandb_run_id: str = None # if specified, continue to log into existing charts, use for training interrupted cases
     resume_wandb_run: bool = False # if true will log data to the last wandb run in the specified project
     strategy: str = "ddp_find_unused_parameters_true"
@@ -130,6 +145,7 @@ class TrainConfig:
     wandb_progress_bar_refresh_rate: int = 1
     wandb_log_every_n_steps: int = 1
     devices: Union[tuple, int] = (0, 1, 2, 3)
+    # devices: Union[tuple, int] = (2, 3)
     limit_val_batches: Optional[int] = 4 # val_batch_size * limit_val_batches samples will be logged to wandb and saved locally each val step
     limit_test_batches: Optional[int] = 4 # test_batch_size * limit_test_batches samples will be logged to wandb and saved locally during test
     num_sanity_val_steps: int = 4

@@ -1,3 +1,6 @@
 [submodule "EPAlign/CLIP"]
 	path = EPAlign/CLIP
 	url = https://github.com/openai/CLIP.git
+[submodule "EMITTS/Tacotron2/waveglow"]
+	path = EMITTS/Tacotron2/waveglow
+	url = https://github.com/NVIDIA/waveglow.git

@@ -171,7 +171,12 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
                                  weight_decay=hparams.weight_decay)
 
     if hparams.fp16_run:
-        from apex import amp
+        try:
+            from apex import amp
+        except ImportError:
+            raise ImportError(
+                "Please install apex from https://www.github.com/nvidia/apex "
+                "to use fp16 training.")
         model, optimizer = amp.initialize(
             model, optimizer, opt_level='O2')
 
@@ -248,7 +253,7 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
                          hparams.distributed_run, rank)
                 if rank == 0:
                     checkpoint_path = os.path.join(
-                        output_directory, "checkpoint_{}".format(iteration))
+                        output_directory, "checkpoint_{}.pt".format(iteration))
                     save_checkpoint(model, optimizer, learning_rate, iteration,
                                     checkpoint_path)
 
@@ -291,9 +296,11 @@ if __name__ == '__main__':
     # training_files = 'filelists/ljs_audio_text_train_filelist.txt'
     # validation_files = 'filelists/ljs_audio_text_val_filelist.txt'
 
+    PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    print(PROJECT_ROOT)
     # tacotron_ef/tacotron_eid
-    training_files = 'filelists/esd_en_audio_sid_text_eid_train_filelist.txt'
-    validation_files = 'filelists/esd_en_audio_sid_text_eid_val_filelist.txt'
+    training_files = f'{PROJECT_ROOT}/filelist/ESD/esd_en_audio_sid_text_efeature_train_filelist.txt'
+    validation_files = f'{PROJECT_ROOT}/filelist/ESD/esd_en_audio_sid_text_efeature_val_filelist.txt'
 
     hparams = create_hparams(args.hparams, 
                              is_multi_speaker=args.multi_speaker, 

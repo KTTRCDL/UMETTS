@@ -100,20 +100,33 @@ class TextMelLoader(torch.utils.data.Dataset):
         return sid
     
     def get_emotion_id(self, eid):
-        eid = torch.IntTensor([int(eid)])
+        if type(eid) == str and 'pt' in eid:
+            efeature2eid = {
+                'neutral': 0,
+                'angry': 1,
+                'happy': 2,
+                'sad': 3,
+                'surprise': 4,
+            }
+            eid = efeature2eid[eid.split('/')[-1][:-3]]
+        else:
+            eid = torch.IntTensor([int(eid)])
         return eid
 
     def get_emotion_feature(self, eid):
         # feature = torch.load(featurepath)
-        eid2efeature_name={
-            0: 'neutral',
-            1: 'angry',
-            2: 'happy',
-            3: 'sad',
-            4: 'surprise',
-        }
-        featurepath = f'path/to/mmefeatures'
-        feature = torch.load(featurepath,  map_location=torch.device('cpu'))
+        if type(eid) == str and 'pt' in eid:
+            feature = torch.load(eid,  map_location=torch.device('cpu'))
+        else:
+            eid2efeature_name={
+                0: 'neutral',
+                1: 'angry',
+                2: 'happy',
+                3: 'sad',
+                4: 'surprise',
+            }
+            featurepath = f'path/to/mmefeatures/{eid2efeature_name[eid]}.pt'
+            feature = torch.load(featurepath,  map_location=torch.device('cpu'))
         return feature
 
     def __getitem__(self, index):
