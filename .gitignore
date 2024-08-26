@@ -143,6 +143,9 @@ EMITTS/VITS/model/monotonic_align/build
 EMITTS/VITS/model/monotonic_align/monotonic_align/*.so
 EMITTS/FastSpeech2/wandb
 EPAlign/test/*/*
-EMITTS/FastSpeech2/ckpt/ESD_en/*
+EMITTS/FastSpeech2/ckpt/*
 EMITTS/VITS/ckpt/*
 EMITTS/Tacotron2/ckpt/*
+example/*
+mfa_temp/*
+!.gitkeep
