@@ -148,4 +148,3 @@ EMITTS/VITS/ckpt/*
 EMITTS/Tacotron2/ckpt/*
 example/*
 mfa_temp/*
-!.gitkeep
