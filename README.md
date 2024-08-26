@@ -91,13 +91,13 @@ This repository is based on [CLIP](https://github.com/openai/CLIP), [VITS](https
 
 ## Citation
 ```
-@misc{guan2024mmttsmultimodalpromptbased,
-      title={MM-TTS: Multi-modal Prompt based Style Transfer for Expressive Text-to-Speech Synthesis}, 
-      author={Wenhao Guan and Yishuang Li and Tao Li and Hukai Huang and Feng Wang and Jiayan Lin and Lingyan Huang and Lin Li and Qingyang Hong},
+@misc{li2024mmttsunifiedframeworkmultimodal,
+      title={MM-TTS: A Unified Framework for Multimodal, Prompt-Induced Emotional Text-to-Speech Synthesis}, 
+      author={Xiang Li and Zhi-Qi Cheng and Jun-Yan He and Xiaojiang Peng and Alexander G. Hauptmann},
       year={2024},
-      eprint={2312.10687},
+      eprint={2404.18398},
       archivePrefix={arXiv},
-      primaryClass={eess.AS},
-      url={https://arxiv.org/abs/2312.10687}, 
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2404.18398}, 
 }
 ```
