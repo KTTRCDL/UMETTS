@@ -148,3 +148,4 @@ EMITTS/VITS/ckpt/*
 EMITTS/Tacotron2/ckpt/*
 example/*
 mfa_temp/*
+EMITTS/FastSpeech2/src/scripts/FastSpeech2_variant_inference1.ipynb

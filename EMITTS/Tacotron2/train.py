@@ -300,7 +300,9 @@ if __name__ == '__main__':
     print(PROJECT_ROOT)
     # tacotron_ef/tacotron_eid
     training_files = f'{PROJECT_ROOT}/filelist/ESD/esd_en_audio_sid_text_efeature_train_filelist.txt'
+    # training_files = f'{PROJECT_ROOT}/filelist/MEADTTS/MEADTTS_audio_sid_text_efeature_train_filelist.txt'
     validation_files = f'{PROJECT_ROOT}/filelist/ESD/esd_en_audio_sid_text_efeature_val_filelist.txt'
+    # validation_files = f'{PROJECT_ROOT}/filelist/MEADTTS/MEADTTS_audio_sid_text_efeature_val_filelist.txt'
 
     hparams = create_hparams(args.hparams, 
                              is_multi_speaker=args.multi_speaker, 

@@ -105,7 +105,7 @@ class TrainConfig:
     precision: str = 32
     matmul_precision: str = "high"
     lightning_checkpoint_path: str = "ckpt/ESD_en/" # directory to save checkpoints, e.g. path/to/ckpt
-    # lightning_checkpoint_path: str = "ckpt/MEADTTS/" 
+    # lightning_checkpoint_path: str = "ckpt/MEADTTS_1/" 
     train_from_checkpoint: Optional[str] = None # filename in <lightning_checkpoint_path> directory
     num_workers: int = 35
     test_wav_files_directory: str = "../../data/ESD_EN_MFA_preprocessed/wav" # directory where test wav files are stored, e.g. path/to/wav
@@ -113,6 +113,8 @@ class TrainConfig:
     # test_wav_files_directory: str = "../../data/MEADTTS_MFA_preprocessed/wav"
     # test_mos_files_directory: str = "../../data/MEADTTS_MFA_preprocessed/mos"
     total_training_steps: int = 5000000
+    # total_training_steps: int = 160_000
+    # total_training_steps: int = 500_000
     val_each_epoch: int = 20
     val_audio_log_each_step: int = 100 # if greater than one will log audio each <n> step, set to save storage
 

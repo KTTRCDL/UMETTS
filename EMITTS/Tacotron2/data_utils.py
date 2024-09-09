@@ -108,6 +108,30 @@ class TextMelLoader(torch.utils.data.Dataset):
                 'sad': 3,
                 'surprise': 4,
             }
+            # efeature2eid = {
+            #         "angry_level_1": 0,
+            #         "angry_level_2": 1,
+            #         "angry_level_3": 2,
+            #         "contempt_level_1": 3,
+            #         "contempt_level_2": 4,
+            #         "contempt_level_3": 5,
+            #         "disgusted_level_1": 6,
+            #         "disgusted_level_2": 7,
+            #         "disgusted_level_3": 8,
+            #         "fear_level_1": 9,
+            #         "fear_level_2": 10,
+            #         "fear_level_3": 11,
+            #         "happy_level_1": 12,
+            #         "happy_level_2": 13,
+            #         "happy_level_3": 14,
+            #         "neutral_level_1": 15,
+            #         "sad_level_1": 16,
+            #         "sad_level_2": 17,
+            #         "sad_level_3": 18,
+            #         "surprised_level_1": 19,
+            #         "surprised_level_2": 20,
+            #         "surprised_level_3": 21,
+            #     }
             eid = efeature2eid[eid.split('/')[-1][:-3]]
         else:
             eid = torch.IntTensor([int(eid)])
