@@ -23,3 +23,8 @@ loguru
 
 lightning
 wandb
+
+openai-whisper
+jiwer
+Resemblyzer
+mel-cepstral-distance
