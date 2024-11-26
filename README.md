@@ -4,7 +4,16 @@
 
 ### Xiang Li, Zhiqi Cheng, Jun-Yan He, Junyao Chen, Xiaomao Fan, Xiaojiang Peng, Alexander G. Hauptmann
 
-<!-- In our recent [paper](https://arxiv.org/abs/2404.18398), we propose MM-TTS: A Unified Framework for Multimodal, Prompt-Induced Emotional Text-to-Speech Synthesis. -->
+<p>
+  <a href="https://kttrcdl.github.io/UMETTS/">
+    <img alt="Domo" src="https://img.shields.io/website?down_message=offline&label=sample&up_color=007aff&up_message=online&url=https%3A%2F%2Ftypst.app%2Fdocs"
+  /></a>
+  <a href="https://github.com/KTTRCDL/UMETTS/blob/main/LICENSE">
+    <img alt="Apache-2 License" src="https://img.shields.io/badge/license-GNU%20-brightgreen"
+  /></a>
+</p>
+
+<!-- In our recent [paper](https://arxiv.org/abs/2404.18398), we propose UMETTS: A Unified Framework for Emotional Text-to-Speech Synthesis with Multimodal Prompts. -->
 
 Emotional Text-to-Speech (E-TTS) synthesis has garnered significant attention in recent years due to its potential to revolutionize human-computer interaction. However, current E-TTS approaches often struggle to capture the intricacies of human emotions, primarily relying on oversimplified emotional labels or single-modality input. In this paper, we introduce the Unified Multimodal Prompt-Induced Emotional Text-to-Speech System (UMETTS), a novel framework that leverages emotional cues from multiple modalities to generate highly expressive and emotionally resonant speech. The core of UMETTS consists of two key components: the Emotion Prompt Alignment Module (EP-Align) and the Emotion Embedding-Induced TTS Module(EMI-TTS). (1) EP-Align employs contrastive learning to align emotional features across text, audio, and visual modalities, ensuring a coherent fusion of multimodal information. (2)Subsequently, EMI-TTS integrates the aligned emotional embeddings with state-of-the-art TTS models to synthesize speech that accurately reflects the intended emotions. 
 
