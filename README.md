@@ -94,6 +94,13 @@ Follow the jupyter notebook [EPAlign/script/EPAlign_inference.ipynb](EPAlign/scr
   - For FastSpeech2 variant, follow the jupyter notebook [EMITTS/FastSpeech2/src/scripts/FastSpeech2_variant_inference.ipynb](EMITTS/FastSpeech2/src/scripts/FastSpeech2_variant_inference.ipynb)
   - For Tacotron2 variant, follow the jupyter notebook [EMITTS/Tacotron2/Tacotron2_variant_inference.ipynb](EMITTS/Tacotron2/Tacotron2_variant_inference.ipynb)
 
+## NEW
+We have limited resources for maintaining and updating the code. However, we are aware of the feedback regarding the checkpoints used in the inference code, and we are offering published checkpoints for three different variant models of EMI-TTS.
+
+If you would like to obtain these checkpoints, Please click [HERE](https://drive.google.com/drive/folders/1yX5xPosn4jKM2W3avKfV8KGQfj7md9GA?usp=sharing) and include the message "Request for EMI-TTS published checkpoints" when accessing the shared Google Drive.
+
+**Note**: After downloading the checkpoints to your project, please modify the relevant path/to/checkpoint in the inference code to ensure proper execution.
+
 ## Acknowledgement
 
 This repository is based on [CLIP](https://github.com/openai/CLIP), [VITS](https://github.com/jaywalnut310/vits), [Tacotron2](https://github.com/NVIDIA/tacotron2), [FastSpeech2](https://github.com/ming024/FastSpeech2), and references the [Pytorch-DDP](https://github.com/pytorch/examples/tree/main/distributed/ddp-tutorial-series), [emospeech](https://github.com/deepvk/emospeech). We would like to thank the authors of these work for publicly releasing their code.
