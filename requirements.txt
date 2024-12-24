@@ -28,3 +28,4 @@ openai-whisper
 jiwer
 Resemblyzer
 mel-cepstral-distance
+pyrallis
