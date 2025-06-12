@@ -107,8 +107,6 @@ This repository is based on [CLIP](https://github.com/openai/CLIP), [VITS](https
 
 ## Citation
 
-## Citation
-
 If you find this work useful, please consider citing our paper:
 
 ```bibtex
