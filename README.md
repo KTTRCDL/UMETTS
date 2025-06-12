@@ -105,15 +105,25 @@ If you would like to obtain these checkpoints, Please click [HERE](https://drive
 
 This repository is based on [CLIP](https://github.com/openai/CLIP), [VITS](https://github.com/jaywalnut310/vits), [Tacotron2](https://github.com/NVIDIA/tacotron2), [FastSpeech2](https://github.com/ming024/FastSpeech2), and references the [Pytorch-DDP](https://github.com/pytorch/examples/tree/main/distributed/ddp-tutorial-series), [emospeech](https://github.com/deepvk/emospeech). We would like to thank the authors of these work for publicly releasing their code.
 
-<!-- ## Citation
+## Citation
+
+## Citation
+
+If you find this work useful, please consider citing our paper:
+
+```bibtex
+@INPROCEEDINGS{10889012,
+  author={Li, Xiang and Cheng, Zhi-Qi and He, Jun-Yan and Chen, Junyao and Fan, Xiaomao and Peng, Xiaojiang and Hauptmann, Alexander G.},
+  booktitle={ICASSP 2025 - 2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={UMETTS: A Unified Framework for Emotional Text-to-Speech Synthesis with Multimodal Prompts}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-5},
+  keywords={Human computer interaction;Visualization;Codes;Accuracy;Contrastive learning;Signal processing;Reproducibility of results;Acoustics;Text to speech;Speech processing;Emotional Text-to-Speech;Multimodal Synthesis;Contrastive Learning;Expressive Speech Synthesis;Human-Computer Interaction},
+  doi={10.1109/ICASSP49660.2025.10889012}}
 ```
-@misc{li2024mmttsunifiedframeworkmultimodal,
-      title={MM-TTS: A Unified Framework for Multimodal, Prompt-Induced Emotional Text-to-Speech Synthesis}, 
-      author={Xiang Li and Zhi-Qi Cheng and Jun-Yan He and Xiaojiang Peng and Alexander G. Hauptmann},
-      year={2024},
-      eprint={2404.18398},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2404.18398}, 
-}
-``` -->
+
+
+
+
